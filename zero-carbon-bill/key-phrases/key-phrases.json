@@ -1,5 +1,4 @@
-[{"File": ".write_access_check_file.temp", "KeyPhrases": []},
-{"File": "00002_Jennifer_Valentine_Redacted.pdf.txt.json", "KeyPhrases": [{"BeginOffset": 19, "EndOffset": 27, "Score": 1.0, "Text": "our most"}, {"BeginOffset": 37, "EndOffset": 50, "Score": 0.9999997317792233, "Text": "gift, we must"}]},
+[{"File": "00002_Jennifer_Valentine_Redacted.pdf.txt.json", "KeyPhrases": [{"BeginOffset": 19, "EndOffset": 27, "Score": 1.0, "Text": "our most"}, {"BeginOffset": 37, "EndOffset": 50, "Score": 0.9999997317792233, "Text": "gift, we must"}]},
 {"File": "00013_Alice_Taylor_Redacted.pdf.txt.json", "KeyPhrases": [{"BeginOffset": 0, "EndOffset": 5, "Score": 0.9999998807907247, "Text": "Proud"}, {"BeginOffset": 12, "EndOffset": 18, "Score": 1.0, "Text": "a Kiwi"}, {"BeginOffset": 24, "EndOffset": 27, "Score": 1.0, "Text": "the"}]},
 {"File": "00024_George_Green_Redacted.pdf.txt.json", "KeyPhrases": [{"BeginOffset": 0, "EndOffset": 4, "Score": 1.0, "Text": "Time"}, {"BeginOffset": 8, "EndOffset": 14, "Score": 1.0, "Text": "of the"}]},
 {"File": "00028_Daniel_Oades_Redacted.pdf.txt.json", "KeyPhrases": [{"BeginOffset": 39, "EndOffset": 51, "Score": 1.0, "Text": "is essential"}]},
