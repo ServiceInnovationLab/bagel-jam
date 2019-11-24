@@ -149,3 +149,6 @@ for filename in filenames:
     destination = filename.replace(input_folder_name, output_folder_name)
     with open(destination, 'w') as outfile:
         json.dump(data, outfile)
+
+with open(output_folder_name + 'topics.json', 'w') as outfile:
+    json.dump(topic_terms, outfile)
