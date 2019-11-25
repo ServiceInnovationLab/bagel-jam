@@ -143,8 +143,12 @@ def everything_for_file(filename):
     topics = topics_for_submission(filename)
     return({'sentiment': sentiment, 'key_phrases': key_phrases, 'topics': topics})
 
+file_names_only = []
+
 for filename in filenames:
     print(filename)
+    file_names_only.append(filename.replace(input_folder_name, ''))
+
     data = everything_for_file(filename)
     destination = filename.replace(input_folder_name, output_folder_name)
     with open(destination, 'w') as outfile:
@@ -152,3 +156,6 @@ for filename in filenames:
 
 with open(output_folder_name + 'topics.json', 'w') as outfile:
     json.dump(topic_terms, outfile)
+
+with open(output_folder_name + 'meta.json', 'w') as outfile:
+    json.dump(file_names_only, outfile)
