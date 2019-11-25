@@ -52,16 +52,3 @@ class DataFile(object):
     def split_into_words(self):
         self.words = gensim.utils.simple_preprocess(
             self.cleaned_data, deacc=True)
-
-
-
-
-# for filename,item in data_set.files.items():
-#     print(filename)
-#     print("----------------------------------")
-#     print(item.input_data)
-#     print("----------------------------------")
-#     print(item.cleaned_data)
-#     print("----------------------------------")
-#     print(item.words)
-#     print("----------------------------------")
