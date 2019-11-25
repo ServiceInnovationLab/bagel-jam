@@ -54,11 +54,6 @@ class DataFile(object):
             self.cleaned_data, deacc=True)
 
 
-FILE_PATTERN = 'zero-carbon-bill/input/*.json'
-# FILE_PATTERN = 'test-data/*.txt'
-
-data_set = DataSet(FILE_PATTERN)
-# print(list(data_set.files_with_words(['moment', 'reporting', 'big', 'personal'])))
 
 
 # for filename,item in data_set.files.items():
