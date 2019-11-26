@@ -5,11 +5,7 @@ import re
 import gensim
 from gensim.utils import simple_preprocess
 from gensim import corpora, models
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.decomposition import LatentDirichletAllocation
-from sklearn.datasets import make_multilabel_classification
-# import nltk
-# nltk.download('stopwords')
+
 from nltk.corpus import stopwords
 
 
@@ -112,13 +108,7 @@ class DataFile(object):
 
 
 if __name__ == "__main__":
-    from sklearn.feature_extraction.text import TfidfVectorizer
     dataset = DataSet('zero-carbon-bill/input/*.json')
     dataset.make_lda_model()
     dataset.print_topics(num_topics=20, num_words=15)
     dataset.print_files()
-    # print(dataset.vectorizer.get_feature_names())
-    # dataset.topics(num_topics=5, num_words=15)
-    # for filename in dataset.filenames:
-    #     print(filename)
-    #     filename.vectorize()
