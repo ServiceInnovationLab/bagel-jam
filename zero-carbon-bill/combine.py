@@ -8,29 +8,28 @@ def sort_by_line_number(elem):
 def sort_by_weight(elem):
     return elem['weight']
 
-input_file_pattern = 'input/*.json'
-input_folder_name = 'input/'
-output_folder_name = 'combined/'
+INPUT_FILE_PATTERN = 'input/*.json'
+INPUT_FOLDER_NAME = 'input/'
+OUTPUT_FOLDER_NAME = 'combined/'
 
-filenames = glob(input_file_pattern)
+FILENAMES = glob(INPUT_FILE_PATTERN)
 
 # Import key phrases
-key_phrases_file = 'key-phrases/key-phrases.json'
-with open(key_phrases_file) as f:
+with open('key-phrases/key-phrases.json') as f:
     contents = f.read()
 
-raw_key_phrases = json.loads(contents)
-key_phrases = {}
+RAW_KEY_PHRASES = json.loads(contents)
+KEY_PHRASES = {}
 
-for item in raw_key_phrases:
+for item in RAW_KEY_PHRASES:
     filename = item['File']
-    if key_phrases.get(filename, None) is None:
-        key_phrases[filename] = []
+    if KEY_PHRASES.get(filename, None) is None:
+        KEY_PHRASES[filename] = []
     phrases = item['KeyPhrases']
     for phrase in phrases:
         phrase.pop('BeginOffset')
         phrase.pop('EndOffset')
-    key_phrases[filename] = phrases
+    KEY_PHRASES[filename] = phrases
 
 # Import sentiment analysis
 
@@ -85,30 +84,30 @@ with open('topic-modelling/doc-topics.csv', newline='') as doc_topics:
             docs_with_topics[filename].append(item)
 
 def key_phrases_for_submission(filename):
-    if input_folder_name in filename:
+    if INPUT_FOLDER_NAME in filename:
         input_file_name = filename
-        filename = filename.replace(input_folder_name, '')
+        filename = filename.replace(INPUT_FOLDER_NAME, '')
     else:
-        input_file_name = input_folder_name + filename
+        input_file_name = INPUT_FOLDER_NAME + filename
 
-    p = key_phrases.get(filename, None)
+    p = KEY_PHRASES.get(filename, None)
     return(p)
 
 def topics_for_submission(filename):
-    if input_folder_name in filename:
+    if INPUT_FOLDER_NAME in filename:
         input_file_name = filename
-        filename = filename.replace(input_folder_name, '')
+        filename = filename.replace(INPUT_FOLDER_NAME, '')
     else:
-        input_file_name = input_folder_name + filename
+        input_file_name = INPUT_FOLDER_NAME + filename
 
     return(docs_with_topics.get(filename, None))
 
 def sentiment_analysis_for_submission(filename):
-    if input_folder_name in filename:
+    if INPUT_FOLDER_NAME in filename:
         input_file_name = filename
-        filename = filename.replace(input_folder_name, '')
+        filename = filename.replace(INPUT_FOLDER_NAME, '')
     else:
-        input_file_name = input_folder_name + filename
+        input_file_name = INPUT_FOLDER_NAME + filename
 
     sentiment = sentiment_analysis[filename]
 
@@ -143,19 +142,19 @@ def everything_for_file(filename):
     topics = topics_for_submission(filename)
     return({'sentiment': sentiment, 'key_phrases': key_phrases, 'topics': topics})
 
-file_names_only = []
+FILE_NAMES_ONLY = []
 
-for filename in filenames:
+for filename in FILENAMES:
     print(filename)
-    file_names_only.append(filename.replace(input_folder_name, ''))
+    FILE_NAMES_ONLY.append(filename.replace(INPUT_FOLDER_NAME, ''))
 
     data = everything_for_file(filename)
-    destination = filename.replace(input_folder_name, output_folder_name)
+    destination = filename.replace(INPUT_FOLDER_NAME, OUTPUT_FOLDER_NAME)
     with open(destination, 'w') as outfile:
         json.dump(data, outfile)
 
-with open(output_folder_name + 'topics.json', 'w') as outfile:
+with open(OUTPUT_FOLDER_NAME + 'topics.json', 'w') as outfile:
     json.dump(topic_terms, outfile)
 
-with open(output_folder_name + 'meta.json', 'w') as outfile:
-    json.dump(file_names_only, outfile)
+with open(OUTPUT_FOLDER_NAME + 'meta.json', 'w') as outfile:
+    json.dump(FILE_NAMES_ONLY, outfile)
