@@ -28,15 +28,6 @@ class DataSet(object):
     def filenames(self):
         return glob(self._glob)
 
-    def files_with_words(self, words):
-        for filename, data_file in self.files.items():
-            word_found = False
-            for word in words:
-                if (word in data_file.cleaned_data):
-                    word_found = True
-            if word_found:
-                yield(filename)
-
     def make_lda_model(self):
         """
         Converts the documents into a matrix of features
@@ -66,6 +57,7 @@ class DataSet(object):
             print('---------------------')
 
     def print_topics(self, num_topics, num_words):
+        self.topics = {}
         for i, topic in self.lda_model.show_topics(formatted=True, num_topics=num_topics, num_words=10):
             print(str(i)+": " + topic)
             percent = (self.lda_model[self.corpus[i]][0][1] * 100)
