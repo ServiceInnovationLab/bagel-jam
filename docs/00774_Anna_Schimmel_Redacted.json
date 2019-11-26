@@ -1,1 +1,1 @@
-zero-carbon-bill/combined/00774_Anna_Schimmel_Redacted.json
+{"sentiment": [{"line_number": 0, "original_text": "Let's go!\n", "sentiment": {"sentiment": "positive", "confidence": 0.8176012635231018}}], "key_phrases": [{"Score": 1.0, "Text": "Let"}, {"Score": 0.9999998807907247, "Text": "'s"}], "topics": [{"topic": "000", "confidence": "0.814781"}, {"topic": "001", "confidence": "0.185219"}]}

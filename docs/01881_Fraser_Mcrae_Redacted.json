@@ -1,1 +1,1 @@
-zero-carbon-bill/combined/01881_Fraser_Mcrae_Redacted.json
+{"sentiment": [{"line_number": 0, "original_text": "making any significant change requires public support with compliance rather than expecting government enforcement.\n", "sentiment": {"sentiment": "neutral", "confidence": 0.8824050426483154}}], "key_phrases": [{"Score": 1.0, "Text": "any significant change"}, {"Score": 1.0, "Text": "public support"}, {"Score": 1.0, "Text": "compliance"}, {"Score": 0.9999999403953606, "Text": "government enforcement"}], "topics": [{"topic": "001", "confidence": "1.0"}]}

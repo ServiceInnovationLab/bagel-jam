@@ -4,7 +4,7 @@ import csv
 
 INPUT_FILE_PATTERN = 'input/*.json'
 INPUT_FOLDER_NAME = 'input/'
-OUTPUT_FOLDER_NAME = 'combined/'
+OUTPUT_FOLDER_NAME = '../docs/'
 SENTIMENT_ANALYSIS_FILE = 'sentiment-analysis/output.json'
 DOC_TOPICS_FILE = 'topic-modelling/doc-topics.csv'
 TOPIC_TERMS_FILE = 'topic-modelling/topic-terms.csv'

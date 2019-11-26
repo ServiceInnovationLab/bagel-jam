@@ -1,1 +1,1 @@
-zero-carbon-bill/combined/01612_Tony_Veitch_Redacted.json
+{"sentiment": [{"line_number": 0, "original_text": "We need action, far seeing, visionary action. Anything less is a cop out!\n", "sentiment": {"sentiment": "positive", "confidence": 0.5316570997238159}}], "key_phrases": [{"Score": 1.0, "Text": "We"}, {"Score": 1.0, "Text": "action"}, {"Score": 0.9993148852640982, "Text": "visionary action"}, {"Score": 0.9997140204159047, "Text": "Anything less"}, {"Score": 1.0, "Text": "a cop"}], "topics": [{"topic": "010", "confidence": "1.0"}]}
