@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from glob import glob
 import re
 import gensim
@@ -52,3 +54,6 @@ class DataFile(object):
     def split_into_words(self):
         self.words = gensim.utils.simple_preprocess(
             self.cleaned_data, deacc=True)
+
+if __name__ == "__main__":
+    dataset = DataSet('zero-carbon-bill/input/*.json')
