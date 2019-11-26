@@ -20,11 +20,6 @@ class DataSet(object):
             self.files[filename] = DataFile(filename)
 
     @property
-    def all_input_data(self):
-        for filename, data_file in self.files.items():
-            yield(data_file.input_data)
-
-    @property
     def filenames(self):
         return glob(self._glob)
 
@@ -40,7 +35,7 @@ class DataSet(object):
             list_of_list_of_tokens.append(data_file.words)
 
         self.dictionary_LDA = corpora.Dictionary(list_of_list_of_tokens)
-        self.dictionary_LDA.filter_extremes(no_below=3, no_above=0.9)
+        self.dictionary_LDA.filter_extremes(no_below=3, no_above=0.8)
         self.corpus = [self.dictionary_LDA.doc2bow(
             list_of_tokens) for list_of_tokens in list_of_list_of_tokens]
         num_topics = 20
@@ -103,4 +98,4 @@ if __name__ == "__main__":
     dataset = DataSet('zero-carbon-bill/input/*.json')
     dataset.make_lda_model()
     dataset.print_topics(num_topics=20, num_words=15)
-    dataset.print_files()
+    # dataset.print_files()
