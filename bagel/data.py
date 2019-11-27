@@ -12,8 +12,9 @@ from nltk.corpus import stopwords
 class DataSet(object):
     TOKEN_PATTERN = r'\b[0-9a-zA-ZāēīōūĀĒĪŌŪ]{3,}\b'
 
-    def __init__(self, glob):
+    def __init__(self, glob, num_topics):
         self._glob = glob
+        self.num_topics = num_topics
         self.files = {}
         self.input_data = {}
         for filename in self.filenames:
@@ -23,37 +24,45 @@ class DataSet(object):
     def filenames(self):
         return glob(self._glob)
 
+    @property
+    def list_of_list_of_tokens(self):
+        return [data_file.words for filename, data_file in self.files.items()]
+
+    @property
+    def all_tokens(self):
+        for filename, data_file in self.files.items():
+            for word in data_file.words:
+                yield word
+
     def make_lda_model(self):
         """
-        Converts the documents into a matrix of features
+        Converts the documents into a matrix of feature
          features are interesting words
          https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html
         """
 
-        list_of_list_of_tokens = []
-        for filename, data_file in self.files.items():
-            list_of_list_of_tokens.append(data_file.words)
-
-        self.dictionary_LDA = corpora.Dictionary(list_of_list_of_tokens)
-        self.dictionary_LDA.filter_extremes(no_below=3, no_above=0.8)
-        self.corpus = [self.dictionary_LDA.doc2bow(
-            list_of_tokens) for list_of_tokens in list_of_list_of_tokens]
-        num_topics = 20
-        self.lda_model = models.LdaModel(self.corpus, num_topics=num_topics,
-                                         id2word=self.dictionary_LDA,
-                                         passes=4, alpha=[0.01]*num_topics,
-                                         eta=[0.01]*len(self.dictionary_LDA.keys()))
+        self.dictionary = corpora.Dictionary(self.list_of_list_of_tokens)
+        self.dictionary.filter_extremes(no_below=3, no_above=0.8)
+        self.corpus = [self.dictionary.doc2bow(
+            list_of_tokens) for list_of_tokens in self.list_of_list_of_tokens]
+        self.lda_model = models.LdaModel(self.corpus, num_topics=self.num_topics,
+                                         id2word=self.dictionary,
+                                         passes=4, alpha=[0.01]*self.num_topics,
+                                         eta=[0.01]*len(self.dictionary.keys()))
 
     @property
     def cleaned_data(self):
         for filename, data_file in self.files.items():
-            lda_model[self.dictionary_LDA.doc2bow(data_file.words)]
+            lda_model[self.dictionary.doc2bow(data_file.words)]
             print(filename)
             print('---------------------')
 
-    def print_topics(self, num_topics, num_words):
+    def print_topics(self, num_words):
         self.topics = {}
-        for i, topic in self.lda_model.show_topics(formatted=True, num_topics=num_topics, num_words=10):
+        for i, topic in self.lda_model.show_topics(
+                formatted=True,
+                num_topics=self.num_topics,
+                num_words=num_words):
             print(str(i)+": " + topic)
             percent = (self.lda_model[self.corpus[i]][0][1] * 100)
             print("{percent:.2f}% of the data is in this topic".format(
@@ -74,7 +83,7 @@ class DataSet(object):
 
     def file_topics(self):
         for filename, data_file in self.files.items():
-            file_idx = self.dictionary_LDA.doc2bow(data_file.words)
+            file_idx = self.dictionary.doc2bow(data_file.words)
             model = self.lda_model[file_idx]
             topic_idx = model[0][0]
             percent = model[0][1] * 100
