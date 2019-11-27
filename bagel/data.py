@@ -116,7 +116,7 @@ class DataFile(object):
 
 
 if __name__ == "__main__":
-    dataset = DataSet('zero-carbon-bill/input/*.json')
+    dataset = DataSet('zero-carbon-bill/input/*.txt')
     dataset.make_lda_model()
     dataset.print_topics(num_topics=10, num_words=5)
     dataset.print_files()
