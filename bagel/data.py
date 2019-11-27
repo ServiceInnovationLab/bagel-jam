@@ -10,7 +10,7 @@ from nltk.corpus import stopwords
 
 
 class DataSet(object):
-    TOKEN_PATTERN = r'\b[a-zA-ZāēīōūĀĒĪŌŪ]{3,}\b'
+    TOKEN_PATTERN = r'\b[0-9a-zA-ZāēīōūĀĒĪŌŪ]{3,}\b'
 
     def __init__(self, glob):
         self._glob = glob
@@ -59,20 +59,34 @@ class DataSet(object):
             print("{percent:.2f}% of the data is in this topic".format(
                 percent=percent))
             print()
+            self.topics[i] = topic
 
     def print_files(self):
-        for filename, data_file in self.files.items():
-            model = self.lda_model[self.dictionary_LDA.doc2bow(
-                data_file.words)]
+        for item in self.file_topics():
             print("{percent:2.2f}% in topic {topic_number}.\t{filename}".format(
-                filename=filename,
-                percent=model[0][1] * 100,
-                topic_number=model[0][0]))
+                filename=item['filename'],
+                percent=item['percent'],
+                topic_number=item['topic_idx']))
+            print("TOPICS: {}".format(item['topic']))
+            print(self.files[item['filename']].cleaned_data)
+            print('-----------------------')
+            print()
+
+    def file_topics(self):
+        for filename, data_file in self.files.items():
+            file_idx = self.dictionary_LDA.doc2bow(data_file.words)
+            model = self.lda_model[file_idx]
+            topic_idx = model[0][0]
+            percent = model[0][1] * 100
+            topic = self.topics.get(topic_idx)
+            yield({
+                'filename': filename,
+                'percent': percent,
+                'topic_idx': topic_idx,
+                'topic': topic})
 
 
 class DataFile(object):
-    regexp = "[,\\.!?]"
-
     def __init__(self, filename):
         self._filename = filename
         with open(filename) as f:
@@ -82,8 +96,6 @@ class DataFile(object):
 
     def clean(self):
         self.cleaned_data = self.input_data.lower()
-        # Remove punctuation
-        self.cleaned_data = re.sub(self.regexp, '', self.cleaned_data)
         # joins some phrases
         self.cleaned_data = self.cleaned_data.replace(
             'new zealand', 'newzealand')
@@ -97,5 +109,5 @@ class DataFile(object):
 if __name__ == "__main__":
     dataset = DataSet('zero-carbon-bill/input/*.json')
     dataset.make_lda_model()
-    dataset.print_topics(num_topics=20, num_words=15)
-    # dataset.print_files()
+    dataset.print_topics(num_topics=10, num_words=5)
+    dataset.print_files()
