@@ -2,7 +2,7 @@ import json
 from glob import glob
 import csv
 
-INPUT_FILE_PATTERN = 'input/*.json'
+INPUT_FILE_PATTERN = 'input/*.txt'
 INPUT_FOLDER_NAME = 'input/'
 OUTPUT_FOLDER_NAME = '../docs/'
 SENTIMENT_ANALYSIS_FILE = 'sentiment-analysis/output.json'
