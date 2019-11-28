@@ -6,7 +6,7 @@ This is a repository to interpret submission data and serve it up as tasty tasty
 
 ## Why is it called Bagel Jam
 
-The hardest problem in computer science is naming things. The Lab team avoid this unnecesary obstacle by naming projects after what we have for breakfast. The bagel project is a series of discovery/research sprints, exploring emerging tools for policy consultation analysis. This is one repo that was created in our analysis.
+The hardest problem in computer science is naming things. The Lab team avoids this unnecessary obstacle by naming projects after what we have for breakfast. The bagel project is a series of discovery/research sprints, exploring emerging tools for policy consultation analysis. This is one of the repos that was created in our analysis.
 
 
 ## Tell me more
