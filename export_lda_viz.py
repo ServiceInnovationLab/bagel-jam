@@ -1,4 +1,4 @@
-from bagel.viz.viz import export_lda_viz
+from bagel.viz.export import export_lda_viz
 
 FILE_PATTERN = 'zero-carbon-bill/input/*.txt'
 # Tweak this parameter until it brings joy
