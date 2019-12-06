@@ -17,7 +17,7 @@ It has a few parts, and some more READMEs:
 - Amazon Comprehend's topic modelling, key phrase detection, and sentiment analysis of these
 - Jupyter notebooks to play with the data - these are interactive at [Binder](https://mybinder.org/v2/gh/ServiceInnovationLab/bagel-jam/master)
 - The JSON files in `docs` are served with GitHub Pages
-- `export_lda_viz.py` exports the LDA analysis to a visualisation in `docs/index_lda.html`
+- `export_lda_viz.py` exports the LDA analysis to a visualisation in `docs/lda/index.html`
 
 To run notebooks locally:
 
